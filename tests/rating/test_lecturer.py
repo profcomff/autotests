@@ -38,7 +38,7 @@ class TestLecturerAPI:
             "timetable_id": 92442
         }
         response = requests.post(url, headers=headers, json=body)
-        assert response.status_code == 422
+        assert response.status_code == 200
         response_json = response.json()
         lecturer_id = response_json["id"]
         assert response_json["first_name"] == "Test123"
