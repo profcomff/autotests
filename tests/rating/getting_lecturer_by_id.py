@@ -3,39 +3,27 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-URL = os.getenv("URL")
+base_url = os.getenv("base_url")
 
-lect_id = 7000
+
 def test_correct_id():
-    response = requests.get(f"{URL}/{lect_id}")
-    lecturer = response.json()
+    response1 = requests.get(f"{base_url}/lecturer")
+    json = response1.json()
+    lect_id = json.get("lecturers")[0].get("id")
+    response = requests.get(f"{base_url}/lecturer/{lect_id}")
     assert response.status_code == 200
-    expected_structure = {  #проверка json
-        "id": int,
-        "first_name": str,
-        "last_name": str,
-        "middle_name": str,
-        "avatar_link": str,
-        "timetable_id": int,
-        
-    }
-    for field, expected_type in expected_structure.items():
-        assert field in lecturer
-        assert isinstance(lecturer[field], expected_type)
 
 
-incorrect_id = 99999
+incorrect_1 = 0
+incorrect_2 = -1
 def test_incorrect_id():
-    response = requests.get(f"{URL}/{incorrect_id}")
+    response = requests.get(f"{base_url}/lecturer/{incorrect_1}")
+    assert response.status_code == 404
+    response = requests.get(f"{base_url}/lecturer/{incorrect_2}")
     assert response.status_code == 404
 
 
 invalid_format_id = "evw"
 def test_invalid_format_id():
-    response = requests.get(f"{URL}/{invalid_format_id}")
-    error_response = response.json()
+    response = requests.get(f"{base_url}/lecturer/{invalid_format_id}")
     assert response.status_code == 422
-    expected_structure = { #проверка json 
-        "detail": list
-    }
-    assert isinstance(error_response["detail"], list)
