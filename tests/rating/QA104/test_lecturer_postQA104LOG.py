@@ -10,7 +10,7 @@ timetable_idbase = 5896550
 @pytest.mark.parametrize("last_name", ["", "Николаев", 999, "string"])
 @pytest.mark.parametrize("timetable_id", [timetable_idbase, "ag"])
 def test_create_profile(first_name, last_name, timetable_id):
-    url = f"{BASE_URL}/lecturer"
+    url = f"{BASE_URL}/rating/lecturer"
     data = {
                 "first_name": first_name,
                 "last_name": last_name,

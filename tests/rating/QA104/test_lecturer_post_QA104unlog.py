@@ -41,7 +41,7 @@ from conftest import BASE_URL
                         ("string", "string", "ag", 403)
 ])
 def test_create_profile(first_name, last_name, timetable_id, expected_status):
-    url = f"{BASE_URL}/lecturer"
+    url = f"{BASE_URL}/rating/lecturer"
     data = {
                 "first_name":first_name,
                 "last_name":last_name,
