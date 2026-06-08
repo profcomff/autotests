@@ -1,5 +1,5 @@
 playwright==1.45.0
-pytest==8.2.2
+pytest==9.0.3
 pydantic==2.7.1
 requests==2.32.3
 pydantic-settings==2.0.0
